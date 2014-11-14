@@ -97,6 +97,7 @@ Note that there are a number of days/intervals where there are missing values (c
 
 2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
+In order to fill in missing values, my strategy is to replace each NA with the mean for the interval where that NA exists
 
 ```{r results='hide', message=FALSE, warning=FALSE}
     #to substitute the NA values in steps, fill in each NA with mean for that interval
@@ -169,11 +170,11 @@ Note that there are a number of days/intervals where there are missing values (c
     new_DF_weekend <- subset(new_DF_eachInterval, dayType == "Weekend")
     new_DF_weekday <- subset(new_DF_eachInterval, dayType == "Weekday")
     
+    par(mfrow=c(2,1))
     plot(new_DF_weekend$interval, new_DF_weekend$totalSteps, type = "l", col="blue",
-          main="Total Number of Steps Taken in Each Interval", xlab="Interval", ylab="Total Steps")
-    #add additional lines
-    lines(new_DF_weekday$interval, new_DF_weekday$totalSteps,  col="red")
-    #add legend
-    legend("topright", legend = c("Weekend","Weekday"),lty=c(1,1),col=c("blue","red"))
+          main="Weekend", xlab="Interval", ylab="Total Steps")
+    plot(new_DF_weekday$interval, new_DF_weekday$totalSteps, type = "l", col="blue",
+         main="Weekday", xlab="Interval", ylab="Total Steps")
+    
 ```
     
